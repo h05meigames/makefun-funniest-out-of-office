@@ -14,7 +14,7 @@ Try make.fun with my referral: https://make.fun/r/0ene8b3q
 
 ## How it works
 
-`main.ts` (Node 22, standard library only) prints the line to stdout — a single line of UTF-8 text, within the 140-character limit. A code-point length guard (1–140 characters, counted with `[...line].length`) refuses to print an out-of-range line, and a newline check keeps it to exactly one line.
+`main.ts` (Node 22, standard library only) writes the line to `/output/entry.txt` — a single line of UTF-8 text, no trailing newline, within the 140-character limit — and prints exactly that one line to stdout. A code-point length guard (1–140 characters, counted with `[...line].length`) refuses to write an out-of-range line, and a newline check keeps it to exactly one line.
 
 ## Run
 

@@ -1,8 +1,11 @@
 // make.fun bounty: u-kreutzx-the-funniest-out-of-office-054815cf
 // "The Funniest Out-of-Office" — writes one original out-of-office
-// message, a single line of at most 140 characters, to stdout.
-// Node 22, standard library only. No network, no model calls,
-// no file reads: the line is written here, in this file.
+// message, a single line of at most 140 characters, to
+// /output/entry.txt (the file the sealed scorer reads) and prints it
+// to stdout. Node 22, standard library only. No network, no model
+// calls, no file reads: the line is written here, in this file.
+import { mkdirSync, writeFileSync } from "node:fs";
+
 const line =
   "Out of office until Monday. My inbox is on autopilot and it already filed a complaint about me. Urgent? Email the void — it replies faster.";
 
@@ -17,4 +20,7 @@ if (line.includes("\n")) {
   throw new Error("Entry must be a single line with no newline.");
 }
 
-console.log(line);
+mkdirSync("/output", { recursive: true });
+writeFileSync("/output/entry.txt", line, "utf8");
+// Print exactly the line and nothing else (one line on stdout).
+process.stdout.write(line + "\n");
